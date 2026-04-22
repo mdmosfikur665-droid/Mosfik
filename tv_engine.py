@@ -31,7 +31,7 @@ class TVNetworkBridge(mp.Process):
         headers = {"Origin": "https://www.tradingview.com"}
         session_id = "qs_" + "".join(random.choices(string.ascii_lowercase, k=10))
 
-        async for ws in websockets.connect(self.url, extra_headers=headers, ping_interval=20):
+        async for ws in websockets.connect(self.url, additional_headers=headers, ping_interval=20):
             try:
                 # সেশন সেটআপ
                 await ws.send(self._pack("set_auth_token", ["unauthorized_user_token"]))
