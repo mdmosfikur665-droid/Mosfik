@@ -1,5 +1,6 @@
 import asyncio
 import multiprocessing as mp
+from multiprocessing.connection import Connection
 import random
 import string
 import time
@@ -16,7 +17,7 @@ class TickData(msgspec.Struct):
 
 # নেটওয়ার্ক ব্রিজ (WebSocket কানেকশন)
 class TVNetworkBridge(mp.Process):
-    def __init__(self, symbols: List[str], pipe_conn: mp.connection.Connection):
+    def __init__(self, symbols: List[str], pipe_conn: Connection):
         super().__init__(name="IngressBridge", daemon=True)
         self.symbols = symbols
         self.pipe = pipe_conn
